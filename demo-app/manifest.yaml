@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: app-test-1
-        image: demo:01
+        image: demo:02
         ports:
         - name: web
           containerPort: 5000
