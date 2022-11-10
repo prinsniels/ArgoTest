@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-test-1-deploy
+  namespace: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: app-test-1
+  template:
+    metadata:
+      labels:
+        app: app-test-1
+    spec:
+      containers:
+      - name: app-test-1
+        image: demo:01
+        ports:
+        - name: web
+          containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-test-1-svc
+  namespace: demo-app
+  labels:
+    app: app-test-1
+spec:
+  type: ClusterIP
+  ports:
+  - name:  http
+    port:  5000
+    targetPort: 5000
+    protocol: TCP
+  selector:
+    app: app-test-1
