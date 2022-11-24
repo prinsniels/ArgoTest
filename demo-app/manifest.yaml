@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: demo-app
+  name: demo
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app-test-1-deploy
-  namespace: demo-app
+  namespace: demo
 spec:
-  replicas: 6
+  replicas: 1
   selector:
     matchLabels: 
       app: app-test-1
@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: app-test-1
-        image: demo:02
+        image: char:01
         ports:
         - name: web
           containerPort: 5000
@@ -29,7 +29,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: app-test-1-svc
-  namespace: demo-app
+  namespace: demo
   labels:
     app: app-test-1
 spec:
